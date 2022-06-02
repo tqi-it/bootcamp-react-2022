@@ -3,23 +3,17 @@ import responseData from "../data";
 import { rest } from "msw";
 
 export default [
-  rest.get(`${process.env.REACT_APP_API_URL}/books/:id`, (req, res, ctx) =>
-    res(ctx.status(200), ctx.json(responseData.books.book))
-  ),
-
-  rest.get(`${process.env.REACT_APP_API_URL}/books`, (req, res, ctx) =>
+  rest.get(`/api/books`, (req, res, ctx) =>
     res(ctx.status(200), ctx.json(responseData.books.page))
   ),
 
-  rest.post(`${process.env.REACT_APP_API_URL}/books`, (req, res, ctx) =>
-    res(ctx.status(204))
+  rest.get(`/api/books/:id`, (req, res, ctx) =>
+    res(ctx.status(200), ctx.json(responseData.books.book))
   ),
 
-  rest.put(`${process.env.REACT_APP_API_URL}/books`, (req, res, ctx) =>
-    res(ctx.status(204))
-  ),
+  rest.post(`/api/books`, (req, res, ctx) => res(ctx.status(204))),
 
-  rest.patch(`${process.env.REACT_APP_API_URL}/books`, (req, res, ctx) =>
-    res(ctx.status(204))
-  ),
+  rest.put(`/api/books`, (req, res, ctx) => res(ctx.status(204))),
+
+  rest.patch(`/api/books`, (req, res, ctx) => res(ctx.status(204))),
 ];

@@ -8,8 +8,13 @@ function App() {
 
   useEffect(() => {
     BooksApi.page({}, 0, 5)
-      .then((response) => setData(response))
-      .catch(() => console.log("Erro"));
+      .then((data) => {
+        setData(data);
+
+        // TODO: exemplo para fetch
+        console.log(data);
+      })
+      .catch((error) => console.log("Erro", error));
   }, []);
 
   return (
@@ -27,10 +32,15 @@ function App() {
         >
           Learn React
         </a>
+
+        <ul>
+          {data?.books?.map((item) => (
+            <li key={item.code}>
+              <p>{item?.author}</p>
+            </li>
+          ))}
+        </ul>
       </header>
-      {data?.books?.map((item) => (
-        <b>{item?.author}</b>
-      ))}
     </div>
   );
 }

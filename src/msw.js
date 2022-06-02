@@ -4,6 +4,7 @@ console.log("#### worker.start() ####");
 
 worker.start({
   warnOnUncaptured: false,
+  // quiet: true,
   onUnhandledRequest: (req) => {
     console.error(
       "Encontrou uma solicitação %s não tratada para %s",
@@ -11,6 +12,5 @@ worker.start({
       req.url.href
     );
   },
+  // serviceWorker: { url: `${process.env.PUBLIC_URL}/mockServiceWorker.js` },
 });
-
-// ssh-keygen -t ed25519 -C "teste@tqi.com.br"

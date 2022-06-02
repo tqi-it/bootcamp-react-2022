@@ -1,13 +1,13 @@
 import axios from "axios";
-import { getJwt } from "../commons/utils/auth";
+// import { getJwt } from "../commons/utils/auth";
 
-const REACT_APP_API_URL = "http://localhost:8080/api";
+const REACT_APP_API_URL = "http://localhost:3002/api";
 
 const params = {
   headers: {
-    Accept: "application/json",
+    accept: "application/json",
     "Content-Type": "application/json",
-    Authorization: getJwt(),
+    // Authorization: getJwt(),
   },
 };
 
@@ -24,6 +24,15 @@ const createApi = (baseURL = "", config = {}) => {
     },
     (error) => {
       return Promise.reject(error);
+    }
+  );
+
+  api.interceptors.response.use(
+    (response) => {
+      return response.config.resHeaders ? response : response.data;
+    },
+    (error) => {
+      return error; // onResponseError(error, config);
     }
   );
 
