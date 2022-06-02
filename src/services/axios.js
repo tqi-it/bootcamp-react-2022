@@ -1,17 +1,15 @@
-import axios from "axios";
-// import { getJwt } from "../commons/utils/auth";
-
-const REACT_APP_API_URL = "http://localhost:3002/api";
+import axios from 'axios';
+import { getJwt } from '../commons/utils/auth';
 
 const params = {
   headers: {
-    accept: "application/json",
-    "Content-Type": "application/json",
-    // Authorization: getJwt(),
+    accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: getJwt(),
   },
 };
 
-const createApi = (baseURL = "", config = {}) => {
+const createApi = (baseURL = '', config = {}) => {
   const api = axios.create({
     baseURL,
     ...params,
@@ -19,24 +17,24 @@ const createApi = (baseURL = "", config = {}) => {
   });
 
   api.interceptors.request.use(
-    (config) => {
+    config => {
+      console.log(config);
       return config;
     },
-    (error) => {
-      return Promise.reject(error);
-    }
+    error => Promise.reject(error),
   );
 
   api.interceptors.response.use(
-    (response) => {
-      return response.config.resHeaders ? response : response.data;
+    response => (response.config.resHeaders ? response : response.data),
+    error => {
+      console.log('Erros podem ser tratatos aqui: ', error);
+      return error;
     },
-    (error) => {
-      return error; // onResponseError(error, config);
-    }
   );
 
   return api;
 };
+
+const REACT_APP_API_URL = 'http://localhost:3002/api';
 
 export default createApi(REACT_APP_API_URL);

@@ -1,3 +1,3 @@
-import { Input } from "@mui/material";
+import { Input } from '@mui/material';
 
 export default Input;

@@ -1,6 +1,6 @@
-import api from "./axios";
+import api from './axios';
 
-const path = "/books";
+const path = '/books';
 
 const BooksApi = {
   page: (filters = {}, page, pageSize) =>
