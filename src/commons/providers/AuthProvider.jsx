@@ -9,11 +9,10 @@ const AuthProvider = ({ children }) => {
 
   const signIn = ({ username, password }, callback) =>
     AuthenticationApi.login(username, password)
-      .then(data => {
-        const { token, newUser } = data; // TODO verificar o retorno com o back
-
-        setUser(newUser);
-        setJwt(token /* setar o token */);
+      .then(() => {
+        const token = { isAuthenticated: true, user: 'Usuário Teste' };
+        setUser(token);
+        setJwt(token);
         setIsAuthenticated(true);
         callback();
       })
@@ -22,9 +21,7 @@ const AuthProvider = ({ children }) => {
   const signOut = callback =>
     AuthenticationApi.logout().then(() => {
       setUser(null);
-
       logout();
-      /* remover o token */
       callback();
     });
 
@@ -32,9 +29,11 @@ const AuthProvider = ({ children }) => {
     addStorageListener();
   }, []);
 
-  const value = { user, signIn, signOut, isAuthenticated };
-
-  return <Provider value={value}>{children}</Provider>;
+  return (
+    <Provider value={{ user, signIn, signOut, isAuthenticated }}>
+      {children}
+    </Provider>
+  );
 };
 
 export default AuthProvider;
