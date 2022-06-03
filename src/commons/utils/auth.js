@@ -35,4 +35,4 @@ const addStorageListener = () => {
   };
 };
 
-export { getJwt, setJwt, systemLogout, addStorageListener };
+export { getJwt, setJwt, systemLogout, logout, addStorageListener };

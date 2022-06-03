@@ -1,3 +1,4 @@
+// import { useHistory } from 'react-router-dom';
 import LockIcon from '@mui/icons-material/Lock';
 import PersonIcon from '@mui/icons-material/Person';
 import Button from 'components/Button';
@@ -5,9 +6,19 @@ import TextField from 'components/TextField';
 import Typography from 'components/Typography';
 import InputAdornment from 'components/InputAdornment';
 import { LoginContent, SloganTitle, PaperForm } from './styles';
+import useAuth from 'commons/hooks/useAuth';
 
 const LoginPage = () => {
-  const handleSubmit = () => {};
+  // const { push } = useHistory();
+  const { signIn } = useAuth();
+
+  const callbackRedirect = () => {
+    // push('/books');
+  };
+
+  const handleSubmit = values => {
+    signIn(values, callbackRedirect);
+  };
 
   return (
     <LoginContent>
