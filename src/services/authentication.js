@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import api from './axios';
 
-const LoginApi = {
+const AuthenticationApi = {
   login: (username, password) => {
     const data = {
       username,
@@ -19,4 +19,4 @@ const LoginApi = {
   },
 };
 
-export default LoginApi;
+export default AuthenticationApi;
