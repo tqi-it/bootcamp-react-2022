@@ -3,8 +3,7 @@ import api from './axios';
 const path = '/authors';
 
 const AuthorsApi = {
-  page: (filters = {}, page, pageSize) =>
-    api.get(path, { params: { ...filters, page, pageSize } }),
+  page: (page, pageSize) => api.get(path, { params: { page, pageSize } }),
 };
 
 export default AuthorsApi;

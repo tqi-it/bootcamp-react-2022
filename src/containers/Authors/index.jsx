@@ -13,7 +13,7 @@ const Authors = () => {
   const [data, setData] = useState({ page: 0, authors: [], count: 0 });
 
   const fetch = useCallback((page = 0) => {
-    AuthorsApi.page({}, page, 5)
+    AuthorsApi.page(page, 5)
       .then(data => setData(data))
       .catch(error => console.log('Error', error));
   }, []);
