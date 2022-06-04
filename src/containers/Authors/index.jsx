@@ -6,7 +6,7 @@ import Button from 'components/Button';
 import Box from 'components/Box';
 import Container from 'components/Container';
 import Typography from 'components/Typography';
-import { PeopleIcon } from 'components/Icons';
+import { ArrowBackIcon } from 'components/Icons';
 
 const Authors = () => {
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ const Authors = () => {
           sx={{ mt: 3, mb: 2 }}
           onClick={() => navigate('../books', { replace: true })}
         >
-          Voltar <PeopleIcon style={{ marginLeft: '16px' }} />
+          <ArrowBackIcon style={{ marginRight: '16px' }} /> Voltar
         </Button>
       </Box>
     </Container>
