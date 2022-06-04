@@ -17,10 +17,7 @@ const createApi = (baseURL = '', config = {}) => {
   });
 
   api.interceptors.request.use(
-    config => {
-      console.log(config);
-      return config;
-    },
+    config => config,
     error => Promise.reject(error),
   );
 
@@ -35,6 +32,6 @@ const createApi = (baseURL = '', config = {}) => {
   return api;
 };
 
-const REACT_APP_API_URL = 'http://localhost:3002/api';
+const REACT_APP_API_URL = 'http://localhost:3000/api';
 
 export default createApi(REACT_APP_API_URL);

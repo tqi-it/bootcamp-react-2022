@@ -1,12 +1,12 @@
 // import { useHistory } from 'react-router-dom';
 import LockIcon from '@mui/icons-material/Lock';
 import PersonIcon from '@mui/icons-material/Person';
+import useAuth from 'commons/hooks/useAuth';
 import Button from 'components/Button';
 import TextField from 'components/TextField';
 import Typography from 'components/Typography';
-import InputAdornment from 'components/InputAdornment';
+import InputAdornment from 'components/Input/InputAdornment';
 import { LoginContent, SloganTitle, PaperForm } from './styles';
-import useAuth from 'commons/hooks/useAuth';
 
 const LoginPage = () => {
   // const { push } = useHistory();

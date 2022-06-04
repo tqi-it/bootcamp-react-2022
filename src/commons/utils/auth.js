@@ -13,9 +13,7 @@ const systemLogout = () => AuthenticationApi.logout();
 const logout = async navigate => {
   try {
     await systemLogout();
-
     clearJwt();
-
     navigate?.('/login');
   } catch (err) {
     console.log('ERROR: ', err);

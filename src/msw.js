@@ -6,11 +6,13 @@ worker.start({
   warnOnUncaptured: false,
   // quiet: true,
   onUnhandledRequest: req => {
-    console.error(
-      'Encontrou uma solicitação %s não tratada para %s',
-      req.method,
-      req.url.href,
-    );
+    if (req.url.href.includes('/api')) {
+      console.error(
+        'Encontrou uma solicitação %s não tratada para %s',
+        req.method,
+        req.url.href,
+      );
+    }
   },
   // serviceWorker: { url: `${process.env.PUBLIC_URL}/mockServiceWorker.js` },
 });
