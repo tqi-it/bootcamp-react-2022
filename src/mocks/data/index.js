@@ -1,5 +1,5 @@
-/* eslint-disable import/no-anonymous-default-export */
-import books from "./books";
-import auth from "./auth";
+import auth from './auth';
+import authors from './authors';
+import books from './books';
 
-export default { auth, books };
+export default { auth, books, authors };

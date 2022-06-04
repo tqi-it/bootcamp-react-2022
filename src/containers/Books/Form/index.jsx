@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import BooksApi from 'services/books';
@@ -24,14 +24,9 @@ const FormBooks = () => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
+
     BooksApi.save({
       ...fields,
-      name: formData.get('name'),
-      author: formData.get('author'),
-      price: formData.get('price'),
-    });
-
-    console.log({
       name: formData.get('name'),
       author: formData.get('author'),
       price: formData.get('price'),
@@ -135,4 +130,4 @@ const FormBooks = () => {
   );
 };
 
-export default FormBooks;
+export default memo(FormBooks);

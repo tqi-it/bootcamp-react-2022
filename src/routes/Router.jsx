@@ -37,8 +37,12 @@ const Router = () => (
       )}
 
       <Route exact path="/login" element={<LoginPage />} />
-      <Route exact path="/books/update/:id" />
-      <Route exact path="/books/new" />
+      {/* 
+        TODO: exemplo de rotas fixas e publicas
+        
+        <Route exact path="/books/update/:id" />
+        <Route exact path="/books/new" />
+       */}
     </Routes>
   </BrowserRouter>
 );

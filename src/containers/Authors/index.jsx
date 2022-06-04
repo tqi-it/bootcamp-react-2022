@@ -1,43 +1,24 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BooksApi from 'services/books';
+import AuthorsApi from 'services/authors';
 import DataGrid from 'components/DataGrid';
 import Button from 'components/Button';
 import Box from 'components/Box';
 import Container from 'components/Container';
 import Typography from 'components/Typography';
-import IconButton from 'components/IconButton';
-import { AddCircleIcon, PeopleIcon } from 'components/Icons';
+import { PeopleIcon } from 'components/Icons';
 
-const Books = () => {
+const Authors = () => {
   const navigate = useNavigate();
-  const [data, setData] = useState({ page: 0, books: [], count: 0 });
+  const [data, setData] = useState({ page: 0, authors: [], count: 0 });
 
   const fetch = useCallback((page = 0) => {
-    BooksApi.page({}, page, 5)
+    AuthorsApi.page({}, page, 5)
       .then(data => setData(data))
       .catch(error => console.log('Error', error));
   }, []);
 
-  const handleClickEdit = uuid => navigate(`/books/${uuid}`);
-
-  const handleClickNew = () => navigate('/books/new');
-
-  const columns = [
-    { field: 'name', flex: 1, headerName: 'Name do Livro' },
-    { field: 'price', flex: 1, headerName: 'Preço' },
-    { field: 'author', flex: 1, headerName: 'Autor' },
-    {
-      field: 'code',
-      flex: 1,
-      headerName: 'Ações',
-      renderCell: params => (
-        <Button size="small" onClick={() => handleClickEdit(params.value)}>
-          Editar
-        </Button>
-      ),
-    },
-  ];
+  const columns = [{ field: 'name', flex: 1, headerName: 'Nome do Autor' }];
 
   useEffect(() => {
     fetch();
@@ -57,15 +38,12 @@ const Books = () => {
           variant="h5"
           style={{ marginBottom: '16px', marginRight: '16px' }}
         >
-          Livros
-          <IconButton aria-label="delete" size="large" onClick={handleClickNew}>
-            <AddCircleIcon />
-          </IconButton>
+          Autores
         </Typography>
 
         <DataGrid
           rowKey="code"
-          data={data?.books}
+          data={data?.authors}
           page={data?.page}
           columns={columns}
           count={data?.count}
@@ -75,13 +53,13 @@ const Books = () => {
         <Button
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
-          onClick={() => navigate('/authors')}
+          onClick={() => navigate('../books', { replace: true })}
         >
-          Autores <PeopleIcon style={{ marginLeft: '16px' }} />
+          Voltar <PeopleIcon style={{ marginLeft: '16px' }} />
         </Button>
       </Box>
     </Container>
   );
 };
 
-export default Books;
+export default Authors;
