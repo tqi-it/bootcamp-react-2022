@@ -1,10 +1,15 @@
 /* eslint-disable import/no-anonymous-default-export */
 import responseData from '../data';
 import { rest } from 'msw';
+import { mockPagination } from 'mocks/utils';
 
 export default [
   rest.get(`/api/books`, (req, res, ctx) =>
-    res(ctx.status(200), ctx.json(responseData.books.page)),
+    res(
+      ctx.status(200),
+      // ctx.json(responseData.books.page),
+      ctx.json(mockPagination(req, responseData.books.listAll, 'books')),
+    ),
   ),
 
   rest.get(`/api/books/:id`, (req, res, ctx) =>
