@@ -7,7 +7,7 @@ import Box from 'components/Box';
 import Container from 'components/Container';
 import Typography from 'components/Typography';
 import IconButton from 'components/IconButton';
-import { AddCircleIcon, PeopleIcon } from 'components/Icons';
+import { AddCircleIcon, PeopleIcon, EditIcon } from 'components/Icons';
 
 const Books = () => {
   const navigate = useNavigate();
@@ -32,9 +32,13 @@ const Books = () => {
       flex: 1,
       headerName: 'Ações',
       renderCell: params => (
-        <Button size="small" onClick={() => handleClickEdit(params.value)}>
-          Editar
-        </Button>
+        <IconButton
+          size="small"
+          onClick={() => handleClickEdit(params.value)}
+          title="Editar Livro"
+        >
+          <EditIcon />
+        </IconButton>
       ),
     },
   ];
@@ -58,7 +62,12 @@ const Books = () => {
           style={{ marginBottom: '16px', marginRight: '16px' }}
         >
           Livros
-          <IconButton aria-label="delete" size="large" onClick={handleClickNew}>
+          <IconButton
+            aria-label="Novo"
+            size="large"
+            onClick={handleClickNew}
+            title="Novo Livro"
+          >
             <AddCircleIcon />
           </IconButton>
         </Typography>
@@ -77,7 +86,8 @@ const Books = () => {
           sx={{ mt: 3, mb: 2 }}
           onClick={() => navigate('/authors')}
         >
-          Autores <PeopleIcon style={{ marginLeft: '16px' }} />
+          <PeopleIcon style={{ marginRight: '16px' }} />
+          Autores
         </Button>
       </Box>
     </Container>
