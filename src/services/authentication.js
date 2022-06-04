@@ -8,10 +8,9 @@ const AuthenticationApi = {
       password,
       grant_type: 'password',
     };
-
-    return api.post('/auth/login', data, {
+    api.post('/auth/login', data, {
       resHeaders: true,
-    });
+    }).then(response => response ? response : {});
   },
 
   logout: () => {

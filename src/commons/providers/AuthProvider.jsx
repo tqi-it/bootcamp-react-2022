@@ -1,5 +1,5 @@
 import { addStorageListener, setJwt, logout } from 'commons/utils/auth';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AuthenticationApi from 'services/authentication';
 import { Provider } from './AuthContext';
 
@@ -9,8 +9,7 @@ const AuthProvider = ({ children }) => {
 
   const signIn = ({ username, password }, callback) =>
     AuthenticationApi.login(username, password)
-      .then(() => {
-        const token = { isAuthenticated: true, user: 'Usuário Teste' };
+      .then(token => {
         setUser(token);
         setJwt(token);
         setIsAuthenticated(true);

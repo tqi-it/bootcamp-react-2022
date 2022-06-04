@@ -7,24 +7,24 @@ import Typography from 'components/Typography';
 import InputAdornment from 'components/InputAdornment';
 import { LoginContent, SloganTitle, PaperForm } from './styles';
 import useAuth from 'commons/hooks/useAuth';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const LoginPage = () => {
   // const { push } = useHistory();
   const { signIn } = useAuth();
 
   const callbackRedirect = () => {
-    // push('/books');
+    <Navigate to="/books" />
   };
-  const [user, setUser] = useState('');
+
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = event => {
+    debugger;
     event.preventDefault();
-    console.log('entrou submit');
-    console.log(user);
-    console.log(password);
-    signIn({user, password}, callbackRedirect);
+    signIn({username, password}, callbackRedirect);
   };
 
   return (
@@ -49,8 +49,8 @@ const LoginPage = () => {
             name="usuario"
             autoComplete="usuario"
             autoFocus
-            value={user}
-            onChange={e => setUser(e.target.value)}
+            value={username}
+            onChange={e => setUsername(e.target.value)}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
