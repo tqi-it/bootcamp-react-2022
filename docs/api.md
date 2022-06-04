@@ -60,6 +60,8 @@ The REST API to the example app is described below.
 
 `{ "message": "Author not found" }`
 
+## Update a Book
+
 ### Request
 
 `PUT /books/{id}`
@@ -77,6 +79,8 @@ The REST API to the example app is described below.
 - Content-Type: application/json
 
 `{ "message": "Book not found" }`
+
+## Delete a Book
 
 ### Request
 
