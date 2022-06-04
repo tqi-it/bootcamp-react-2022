@@ -7,11 +7,12 @@ const BooksPage = lazy(() => import('containers/Books'));
 const BookForm = lazy(() => import('containers/Books/Form'));
 
 const routes = () => [
-  // {
-  //  path: '/books/new',
-  //  component: BookFormView,
-  //  exact: true,
-  // },
+  {
+    path: '/books/new',
+    component: BookForm,
+    layout: Layout,
+    exact: true,
+  },
   {
     path: '/books/:id',
     component: BookForm,

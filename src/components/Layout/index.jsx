@@ -2,6 +2,8 @@ import { Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Typography from 'components/Typography';
 import Toolbar from 'components/Toolbar';
+import IconButton from 'components/IconButton';
+import { LogoutIcon } from 'components/Icons';
 import { Container, AppBar, Main } from './styles';
 
 const Layout = ({ children }) => (
@@ -11,6 +13,9 @@ const Layout = ({ children }) => (
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Bootcamp
         </Typography>
+        <IconButton href="/login" sx={{ my: 1, mx: 1.5 }} color="inherit">
+          <LogoutIcon />
+        </IconButton>
       </Toolbar>
     </AppBar>
 

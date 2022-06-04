@@ -3,6 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import BooksApi from 'services/books';
 import DataGrid from 'components/DataGrid';
 import Button from 'components/Button';
+import Box from 'components/Box';
+import Container from 'components/Container';
+import Typography from 'components/Typography';
+import IconButton from 'components/IconButton';
+import { AddCircleIcon } from 'components/Icons';
 
 const Books = () => {
   const navigate = useNavigate();
@@ -14,7 +19,9 @@ const Books = () => {
       .catch(error => console.log('Error', error));
   }, []);
 
-  const handleEdit = uuid => navigate(`/books/${uuid}`);
+  const handleClickEdit = uuid => navigate(`/books/${uuid}`);
+
+  const handleClickNew = () => navigate('/books/new');
 
   const columns = [
     { field: 'name', flex: 1 },
@@ -25,7 +32,7 @@ const Books = () => {
       flex: 1,
       headerName: 'Ações',
       renderCell: params => (
-        <Button size="small" onClick={() => handleEdit(params.value)}>
+        <Button size="small" onClick={() => handleClickEdit(params.value)}>
           Editar
         </Button>
       ),
@@ -37,14 +44,35 @@ const Books = () => {
   }, [fetch]);
 
   return (
-    <DataGrid
-      rowKey="code"
-      data={data?.books}
-      page={data?.page}
-      columns={columns}
-      count={data?.count}
-      handlePageChange={fetch}
-    />
+    <Container component="main" maxWidth="lg">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <Typography
+          component="h1"
+          variant="h5"
+          style={{ marginBottom: '16px', marginRight: '16px' }}
+        >
+          Livros
+          <IconButton aria-label="delete" size="large" onClick={handleClickNew}>
+            <AddCircleIcon />
+          </IconButton>
+        </Typography>
+
+        <DataGrid
+          rowKey="code"
+          data={data?.books}
+          page={data?.page}
+          columns={columns}
+          count={data?.count}
+          handlePageChange={fetch}
+        />
+      </Box>
+    </Container>
   );
 };
 

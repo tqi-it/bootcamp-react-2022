@@ -24,7 +24,13 @@ const FormBooks = () => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    // BooksApi.save(id, formData);
+    BooksApi.save({
+      ...fields,
+      name: formData.get('name'),
+      author: formData.get('author'),
+      price: formData.get('price'),
+    });
+
     console.log({
       name: formData.get('name'),
       author: formData.get('author'),
