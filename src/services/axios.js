@@ -25,7 +25,7 @@ const createApi = (baseURL = '', config = {}) => {
     response => (response.config.resHeaders ? response : response.data),
     error => {
       console.log('Erros podem ser tratatos aqui: ', error);
-      return error;
+      return Promise.reject(error.response);
     },
   );
 

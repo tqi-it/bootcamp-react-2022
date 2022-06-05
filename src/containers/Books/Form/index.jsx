@@ -40,7 +40,13 @@ const FormBooks = () => {
   const fetch = id =>
     BooksApi.get(id)
       .then(setFields)
-      .catch(error => console.error('Error:', error));
+      .catch(error => {
+        if (error.status === 404) {
+          console.error('Error 404 - Not Found', error.data);
+          return;
+        }
+        console.error('Error:', error);
+      });
 
   useEffect(() => {
     if (id) {

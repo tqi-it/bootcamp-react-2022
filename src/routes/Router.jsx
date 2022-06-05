@@ -38,7 +38,14 @@ const Router = () => (
 
       <Route exact path="/login" element={<LoginPage />} />
       {/* 
-        TODO: exemplo de rotas fixas e publicas
+
+        TODO: exemplo de rotas fixas privadas
+
+        <RequireAuth redirectTo="/login">
+          <Route exact path="/books/update/:id" />
+        </RequireAuth>
+
+        TODO: exemplo de rotas fixas publicas
         
         <Route exact path="/books/update/:id" />
         <Route exact path="/books/new" />

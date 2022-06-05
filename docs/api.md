@@ -22,6 +22,44 @@ The REST API to the example app is described below.
 | 404         | `NOT FOUND`             |
 | 500         | `INTERNAL SERVER ERROR` |
 
+## Login App
+
+### Request
+
+`POST /auth/login`
+
+`Authorization: Basic xxxxx`
+
+### Response
+
+- HTTP/1.1 200 OK
+- Content-Type: application/json
+
+### Response Error
+
+- HTTP/1.1 401
+- Content-Type: application/json
+
+`{ "message": "Error User/Password" }`
+
+## Logout App
+
+### Request
+
+`POST /auth/logout`
+
+### Response
+
+- HTTP/1.1 204 OK
+- Content-Type: application/json
+
+### Response Error
+
+- HTTP/1.1 400
+- Content-Type: application/json
+
+`{ "message": "xxx" }`
+
 ## Get list of Books
 
 ### Request

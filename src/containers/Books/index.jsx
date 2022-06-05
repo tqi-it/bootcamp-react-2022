@@ -19,7 +19,7 @@ const Books = () => {
   const [data, setData] = useState({ page: 0, books: [], count: 0 });
 
   const fetch = useCallback((page = 0) => {
-    BooksApi.page({}, page, 5)
+    BooksApi.page(page, 5)
       .then(data => setData(data))
       .catch(error => console.log('Error', error));
   }, []);
@@ -79,7 +79,7 @@ const Books = () => {
         >
           Livros
           <IconButton
-            aria-label="Novo"
+            aria-label="Novo Livro"
             size="large"
             onClick={handleClickNew}
             title="Novo Livro"
