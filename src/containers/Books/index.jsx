@@ -7,7 +7,12 @@ import Box from 'components/Box';
 import Container from 'components/Container';
 import Typography from 'components/Typography';
 import IconButton from 'components/IconButton';
-import { AddCircleIcon, PeopleIcon, EditIcon } from 'components/Icons';
+import {
+  AddCircleIcon,
+  PeopleIcon,
+  EditIcon,
+  DeleteIcon,
+} from 'components/Icons';
 
 const Books = () => {
   const navigate = useNavigate();
@@ -23,6 +28,8 @@ const Books = () => {
 
   const handleClickNew = () => navigate('/books/new');
 
+  const handleClickDel = uuid => console.log('handleClickDel', uuid);
+
   const columns = [
     { field: 'name', flex: 1, headerName: 'Name do Livro' },
     { field: 'price', flex: 1, headerName: 'Preço' },
@@ -32,13 +39,22 @@ const Books = () => {
       flex: 1,
       headerName: 'Ações',
       renderCell: params => (
-        <IconButton
-          size="small"
-          onClick={() => handleClickEdit(params.value)}
-          title="Editar Livro"
-        >
-          <EditIcon />
-        </IconButton>
+        <>
+          <IconButton
+            size="small"
+            onClick={() => handleClickEdit(params.value)}
+            title="Editar Livro"
+          >
+            <EditIcon />
+          </IconButton>
+          <IconButton
+            size="small"
+            onClick={() => handleClickDel(params.value)}
+            title="Excluir Livro"
+          >
+            <DeleteIcon />
+          </IconButton>
+        </>
       ),
     },
   ];

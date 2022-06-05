@@ -15,16 +15,18 @@ const AuthProvider = ({ children }) => {
         setUser(token);
         setJwt(token);
         setIsAuthenticated(true);
-        callback();
+        callback?.();
       })
       .catch(() => console.log('Erro login...'));
 
-  const signOut = callback =>
-    AuthenticationApi.logout().then(() => {
+  const signOut = async callback => {
+    try {
+      await logout(callback);
+    } catch (e) {
       setUser(null);
-      logout();
-      callback();
-    });
+      console.error('ERROR: Não possível efetuar o logout!');
+    }
+  };
 
   useEffect(() => {
     addStorageListener();
