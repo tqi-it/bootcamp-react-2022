@@ -13,7 +13,7 @@ const DataGrid = ({
   const handleGetRowId = e => e[rowKey];
 
   return (
-    <div style={{ height: '80vh', width: '100%' }}>
+    <div style={{ height: '50vh', width: '100%' }}>
       <MuiDataGrid
         pagination
         paginationMode="server"

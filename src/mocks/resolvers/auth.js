@@ -1,15 +1,11 @@
-/* eslint-disable import/no-anonymous-default-export */
-import { rest } from "msw";
-import responseData from '../data';
+import { mockAuthorization } from 'mocks/utils';
+import { rest } from 'msw';
 
 export default [
-  rest.post(
-    `/auth/login`,
-    (req, res, ctx) => res(ctx.status(204), ctx.json(responseData.auth))
-  ),
+  rest.post(`/api/auth/login`, (req, res, ctx) => 
+  res(
+    ctx.status(204), 
+    ctx.json(mockAuthorization(req)))),
 
-  rest.post(
-    `${process.env.REACT_APP_API_AUTH_URL}/auth/logout`,
-    (req, res, ctx) => res(ctx.status(204))
-  ),
+  rest.post(`/api/auth/logout`, (req, res, ctx) => res(ctx.status(204))),
 ];

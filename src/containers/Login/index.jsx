@@ -1,8 +1,8 @@
 // import { useHistory } from 'react-router-dom';
 import LockIcon from '@mui/icons-material/Lock';
 import PersonIcon from '@mui/icons-material/Person';
-import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useAuth from 'commons/hooks/useAuth';
 import Button from 'components/Button';
 import TextField from 'components/TextField';
@@ -13,16 +13,14 @@ import { LoginContent, SloganTitle, PaperForm } from './styles';
 const LoginPage = () => {
   // const { push } = useHistory();
   const { signIn } = useAuth();
+  const navigate = useNavigate();
 
-  const callbackRedirect = () => {
-    <Navigate to="/books" />
-  };
+  const callbackRedirect = () => navigate('/books');
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = event => {
-    debugger;
     event.preventDefault();
     signIn({username, password}, callbackRedirect);
   };

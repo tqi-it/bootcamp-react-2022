@@ -5,7 +5,7 @@ const params = {
   headers: {
     accept: 'application/json',
     'Content-Type': 'application/json',
-    Authorization: getJwt(),
+    Authorization: null,
   },
 };
 

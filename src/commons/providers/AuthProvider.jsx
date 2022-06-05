@@ -1,31 +1,38 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import AuthenticationApi from 'services/authentication';
-import { addStorageListener, setJwt, logout } from 'commons/utils/auth';
+import { addStorageListener, logout, login, getJwt, clearJwt } from 'commons/utils/auth';
 import { Provider } from './AuthContext';
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
-  const signIn = ({ username, password }, callback) => {
-    AuthenticationApi.login(username, password)
-      .then(token => {
-        debugger;
-        setUser(token);
-        setJwt(token);
+  const signIn = async ({ username, password }, callback) => {
+    try {
+      await login({ username, password }, callback);
+      if(getJwt()) {
+        setUser(username);
         setIsAuthenticated(true);
-        callback();
-      })
-    .catch(() => console.log('Erro login...'));
-  }
-
-  const signOut = callback =>
-    AuthenticationApi.logout().then(() => {
+       } else {
+        setUser(null); 
+        setIsAuthenticated(false);
+        clearJwt();
+       }
+    }catch (e) {
       setUser(null);
-      logout();
-      callback();
-    });
+      setIsAuthenticated(false);
+      console.error('ERROR: Não possível efetuar o login!');
+    }
+  };
+
+  const signOut = async callback => {
+    try {
+      await logout(callback);
+    } catch (e) {
+      setUser(null);
+      console.error('ERROR: Não possível efetuar o logout!');
+    }
+  };
 
   useEffect(() => {
     addStorageListener();

@@ -37,9 +37,18 @@ The REST API to the example app is described below.
 
 ## Create a new Book
 
+### Request## Get list of Books
+
 ### Request
 
-`POST /books`
+`GET /books`
+
+### Response
+
+- HTTP/1.1 200 OK
+- Content-Type: application/json
+
+`{ "page": 0, "count": 0, "books": [] }`
 
 - HTTP/1.1 201 OK
 - Content-Type: application/json
@@ -59,3 +68,71 @@ The REST API to the example app is described below.
 - Content-Type: application/json
 
 `{ "message": "Author not found" }`
+
+## Update a Book
+
+### Request
+
+`PUT /books/{id}`
+
+- HTTP/1.1 200 OK
+- Content-Type: application/json
+
+### Response
+
+`{ "code": "1C6AACF8-60F2-4688-A8F7-379CBC324B7A", "name": "Numero1", "price": 123, "image": "/tmp/book_store/images/748af67e_d797_48e0_9824_72c6b2fa0a50.png", "author": "Thiago Henrique Nunes" }`
+
+### Response Error
+
+- HTTP/1.1 404
+- Content-Type: application/json
+
+`{ "message": "Book not found" }`
+
+## Delete a Book
+
+### Request
+
+`DELETE /books/{id}`
+
+- HTTP/1.1 204 OK
+
+### Response Error
+
+- HTTP/1.1 404
+- Content-Type: application/json
+
+`{ "message": "Book not found" }`
+
+## Update a Book Price
+
+### Request
+
+`PATCH /books/{id}`
+
+- HTTP/1.1 200 OK
+- Content-Type: application/json
+
+### Response
+
+`{ "code": "1C6AACF8-60F2-4688-A8F7-379CBC324B7A", "name": "Numero1", "price": 123, "image": "/tmp/book_store/images/748af67e_d797_48e0_9824_72c6b2fa0a50.png", "author": "Thiago Henrique Nunes" }`
+
+### Response Error
+
+- HTTP/1.1 404
+- Content-Type: application/json
+
+`{ "message": "Book not found" }`
+
+## Get list of Authors
+
+### Request
+
+`GET /authors`
+
+### Response
+
+- HTTP/1.1 200 OK
+- Content-Type: application/json
+
+`{ "page": 0, "count": 0, "authors": [] }`

@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LoginPage from 'containers/login';
+import LoginPage from 'containers/Login';
 import RequireAuth from './RequireAuth';
 import routes from './routes';
 
@@ -37,8 +37,12 @@ const Router = () => (
       )}
 
       <Route exact path="/login" element={<LoginPage />} />
-      <Route exact path="/books/update/:id" />
-      <Route exact path="/books/new" />
+      {/* 
+        TODO: exemplo de rotas fixas e publicas
+        
+        <Route exact path="/books/update/:id" />
+        <Route exact path="/books/new" />
+       */}
     </Routes>
   </BrowserRouter>
 );

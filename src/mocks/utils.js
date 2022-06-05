@@ -20,4 +20,14 @@ const mockPagination = (req, listAll, arrayName) => {
   return mockLazyList(page, perPage, listAll, arrayName);
 };
 
-export { mockLazyList, mockPagination };
+const mockAuthorization = ({username, password}) => {
+  debugger;
+  const user = 'bootcamp';
+  const pass = 'vempratqi';
+  if(username === user && password === pass) {
+    //TO DO - Mock jwt
+    return {res: 'oksdt9773324'};
+  }
+}
+
+export { mockLazyList, mockPagination, mockAuthorization };
