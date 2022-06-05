@@ -21,12 +21,11 @@ const mockPagination = (req, listAll, arrayName) => {
 };
 
 const mockAuthorization = ({username, password}) => {
-  debugger;
   const user = 'bootcamp';
   const pass = 'vempratqi';
   if(username === user && password === pass) {
     //TO DO - Mock jwt
-    return {res: 'oksdt9773324'};
+    return {token: 'oksdt9773324'};
   }
 }
 

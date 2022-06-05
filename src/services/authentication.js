@@ -2,22 +2,20 @@
 import { setJwt } from 'commons/utils/auth';
 import api from './axios';
 
-const path = '/login';
-
 const AuthenticationApi = {
-  login: (username, password) => {
+  login: ({username, password}, navigate) => {
     const data = {
       username,
       password,
       grant_type: 'password',
     };
     try{
-      api.post(path, data, {
+      api.post('/auth/login', data, {
         resHeaders: true,
       }).then(response => {
-        debugger;
-        if(response?.token) {
-          setJwt(response.token);
+        if(response?.data?.token) {
+          setJwt(response.data.token);
+          navigate?.('/books');
         }
       }
 

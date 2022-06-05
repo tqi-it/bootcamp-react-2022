@@ -2,14 +2,14 @@ import AuthenticationApi from 'services/authentication';
 
 const PROF_ITEMS = 'PROF_ITEMS';
 
-const getJwt = () => `Bearer ${sessionStorage.getItem(PROF_ITEMS)}`;
+const getJwt = () => sessionStorage.getItem(PROF_ITEMS);
 
 const setJwt = token => sessionStorage.setItem(PROF_ITEMS, token);
 
 const clearJwt = () => sessionStorage.removeItem(PROF_ITEMS);
 
 const systemLogout = () => AuthenticationApi.logout();
-const systemLogin = () => AuthenticationApi.login();
+const systemLogin = ({ username, password }, navigate) => AuthenticationApi.login({ username, password }, navigate);
 
 const logout = async navigate => {
   try {
@@ -22,10 +22,8 @@ const logout = async navigate => {
 };
 
 const login = async ({ username, password }, navigate) => {
-  debugger;
   try {
-    await systemLogin({ username, password });
-    if (getJwt()) navigate?.('/books');
+    await systemLogin({ username, password }, navigate);
   } catch (err) {
     console.log('ERROR: ', err);
   }
