@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 import api from './axios';
 
+const path = '/login';
+
 const AuthenticationApi = {
   login: (username, password) => {
     const data = {
@@ -8,9 +10,9 @@ const AuthenticationApi = {
       password,
       grant_type: 'password',
     };
-    api.post('/auth/login', data, {
+    api.post(path, data, {
       resHeaders: true,
-    }).then(response => response ? response : {});
+    });
   },
 
   logout: () => {

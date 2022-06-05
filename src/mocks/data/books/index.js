@@ -6,6 +6,7 @@ import patch from './patch';
 import post from './post';
 import post400 from './post400';
 import put from './put';
+import listAll from './listAll';
 
 export default {
   page,
@@ -16,4 +17,5 @@ export default {
   post,
   post400,
   put,
+  listAll,
 };

@@ -1,10 +1,11 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { rest } from "msw";
+import responseData from '../data';
 
 export default [
   rest.post(
-    `${process.env.REACT_APP_API_AUTH_URL}/auth/login`,
-    (req, res, ctx) => res(ctx.status(204))
+    `/auth/login`,
+    (req, res, ctx) => res(ctx.status(204), ctx.json(responseData.auth))
   ),
 
   rest.post(
