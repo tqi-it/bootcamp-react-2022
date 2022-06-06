@@ -12,8 +12,8 @@ const Authors = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({ page: 0, authors: [], count: 0 });
 
-  const fetch = useCallback((page = 0) => {
-    AuthorsApi.page(page, 5)
+  const fetch = useCallback(page => {
+    AuthorsApi.page(page)
       .then(data => setData(data))
       .catch(error => console.log('Error', error));
   }, []);

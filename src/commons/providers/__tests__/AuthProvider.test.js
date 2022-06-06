@@ -54,14 +54,14 @@ describe('AuthProvider', () => {
     const { loginButton } = setup();
     expect(loginButton).toBeInTheDocument();
 
-    //   userEvent.click(loginButton);
+    //   await userEvent.click(loginButton);
     //   expect(getByText(/Logado/i)).toBeInTheDocument();
   });
 
   test('should render logout button', async () => {
     const { findByText, logoutButton } = setup();
     expect(logoutButton).toBeInTheDocument();
-    userEvent.click(logoutButton);
+    await userEvent.click(logoutButton);
 
     expect(await findByText(/Logar/i)).toBeInTheDocument();
   });

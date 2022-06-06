@@ -64,7 +64,7 @@ The REST API to the example app is described below.
 
 ### Request
 
-`GET /books`
+`GET /books?page=0&size=5`
 
 ### Response
 
@@ -166,7 +166,7 @@ The REST API to the example app is described below.
 
 ### Request
 
-`GET /authors`
+`GET /authors?page=0&size=5`
 
 ### Response
 

@@ -18,8 +18,8 @@ const Books = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({ page: 0, books: [], count: 0 });
 
-  const fetch = useCallback((page = 0) => {
-    BooksApi.page(page, 5)
+  const fetch = useCallback(page => {
+    BooksApi.page(page)
       .then(data => setData(data))
       .catch(error => console.log('Error', error));
   }, []);
