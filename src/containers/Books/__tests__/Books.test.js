@@ -17,8 +17,12 @@ describe('Books', () => {
   });
 
   test('should render component', () => {
-    const { container, getByText } = setup();
+    const { container } = setup();
     expect(container).toBeInTheDocument();
+  });
+
+  test('should render title', () => {
+    const { getByText } = setup();
     expect(getByText(/Livros/i)).toBeInTheDocument();
   });
 });
