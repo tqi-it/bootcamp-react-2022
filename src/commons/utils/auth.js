@@ -9,7 +9,7 @@ const setJwt = token => sessionStorage.setItem(PROF_ITEMS, token);
 const clearJwt = () => sessionStorage.removeItem(PROF_ITEMS);
 
 const systemLogout = () => AuthenticationApi.logout();
-const systemLogin = ({ username, password }, navigate) => AuthenticationApi.login({ username, password }, navigate);
+const systemLogin = ({ username, password }) => AuthenticationApi.login({ username, password });
 
 const logout = async navigate => {
   try {
@@ -23,7 +23,11 @@ const logout = async navigate => {
 
 const login = async ({ username, password }, navigate) => {
   try {
-    await systemLogin({ username, password }, navigate);
+     const response = await systemLogin({ username, password });
+     if(response) {
+      setJwt(response?.data?.token);
+      navigate?.();
+     }
   } catch (err) {
     console.log('ERROR: ', err);
   }

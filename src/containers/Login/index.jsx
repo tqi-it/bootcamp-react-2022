@@ -1,4 +1,3 @@
-// import { useHistory } from 'react-router-dom';
 import LockIcon from '@mui/icons-material/Lock';
 import PersonIcon from '@mui/icons-material/Person';
 import { useState } from 'react';
@@ -11,7 +10,6 @@ import InputAdornment from 'components/Input/InputAdornment';
 import { LoginContent, SloganTitle, PaperForm } from './styles';
 
 const LoginPage = () => {
-  // const { push } = useHistory();
   const { signIn } = useAuth();
   const navigate = useNavigate();
 
