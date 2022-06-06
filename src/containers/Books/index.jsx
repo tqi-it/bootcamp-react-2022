@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BooksApi from 'services/books';
+import { isStatusNotFound } from 'services/errors';
+import { toast } from 'commons/utils/toast';
 import DataGrid from 'components/DataGrid';
 import Button from 'components/Button';
 import Box from 'components/Box';
@@ -21,7 +23,13 @@ const Books = () => {
   const fetch = useCallback(page => {
     BooksApi.page(page)
       .then(data => setData(data))
-      .catch(error => console.log('Error', error));
+      .catch(error => {
+        if (isStatusNotFound(error.status)) {
+          toast.error('Não foi encontrado nenhum Registro na base de dados!');
+        }
+
+        console.log('Error', error);
+      });
   }, []);
 
   const handleClickEdit = uuid => navigate(`/books/${uuid}`);
