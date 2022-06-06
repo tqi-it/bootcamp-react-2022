@@ -32,6 +32,6 @@ const createApi = (baseURL = '', config = {}) => {
   return api;
 };
 
-const REACT_APP_API_URL = 'http://localhost:3000/api';
+const REACT_APP_API_URL = '/api';
 
 export default createApi(REACT_APP_API_URL);

@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import LoginPage from 'containers/login';
 import RequireAuth from './RequireAuth';
 import routes from './routes';
@@ -35,8 +35,9 @@ const Router = () => (
           />
         ),
       )}
-
       <Route exact path="/login" element={<LoginPage />} />
+      <Route path="/" element={<Navigate replace to="/login" />} />
+
       {/* 
 
         TODO: exemplo de rotas fixas privadas
