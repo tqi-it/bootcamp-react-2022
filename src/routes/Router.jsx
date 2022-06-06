@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import LoginPage from 'containers/login';
+import LoginPage from 'containers/Login';
 import RequireAuth from './RequireAuth';
 import routes from './routes';
 

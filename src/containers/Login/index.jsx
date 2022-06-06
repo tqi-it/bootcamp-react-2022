@@ -1,6 +1,7 @@
-// import { useHistory } from 'react-router-dom';
 import LockIcon from '@mui/icons-material/Lock';
 import PersonIcon from '@mui/icons-material/Person';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useAuth from 'commons/hooks/useAuth';
 import Button from 'components/Button';
 import TextField from 'components/TextField';
@@ -9,15 +10,17 @@ import InputAdornment from 'components/Input/InputAdornment';
 import { LoginContent, SloganTitle, PaperForm } from './styles';
 
 const LoginPage = () => {
-  // const { push } = useHistory();
   const { signIn } = useAuth();
+  const navigate = useNavigate();
 
-  const callbackRedirect = () => {
-    // push('/books');
-  };
+  const callbackRedirect = () => navigate('/books');
 
-  const handleSubmit = values => {
-    signIn(values, callbackRedirect);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    signIn({username, password}, callbackRedirect);
   };
 
   return (
@@ -42,6 +45,8 @@ const LoginPage = () => {
             name="usuario"
             autoComplete="usuario"
             autoFocus
+            value={username}
+            onChange={e => setUsername(e.target.value)}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -60,6 +65,8 @@ const LoginPage = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
