@@ -3,8 +3,7 @@ import api from './axios';
 const path = '/books';
 
 const BooksApi = {
-  page: (filters = {}, page, pageSize) =>
-    api.get(path, { params: { ...filters, page, pageSize } }),
+  page: (page = 0, size = 5) => api.get(`${path}?page=${page}&size=${size}`),
 
   get: id => api.get(`${path}/${id}`),
 

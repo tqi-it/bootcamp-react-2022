@@ -28,6 +28,7 @@ const AuthProvider = ({ children }) => {
   const signOut = async callback => {
     try {
       await logout(callback);
+      setIsAuthenticated(false);
     } catch (e) {
       setUser(null);
       console.error('ERROR: Não possível efetuar o logout!');

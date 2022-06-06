@@ -22,11 +22,51 @@ The REST API to the example app is described below.
 | 404         | `NOT FOUND`             |
 | 500         | `INTERNAL SERVER ERROR` |
 
+## Login App
+
+### Request
+
+`POST /auth/login`
+
+`Authorization: Basic xxxxx`
+
+### Response
+
+- HTTP/1.1 200 OK
+- Content-Type: application/json
+
+### Response Error
+
+- HTTP/1.1 401
+- Content-Type: application/json
+
+`{ "message": "Error User/Password" }`
+
+## Logout App
+
+### Request
+
+`POST /books`
+
+### Response
+
+- HTTP/1.1 204 OK
+- Content-Type: application/json
+
+`{ "code": "B93A79A6-9ED0-4286-9F46-53A8686FD009", "name": "Book name", "price": 1990, "image": "/tmp/book_store/images/ccee08d1_5e04_4da5_833b_7464ef286637.png", "author": "Author name" }`
+
+### Response Error
+
+- HTTP/1.1 400
+- Content-Type: application/json
+
+`{ "errors": [ { "parameter": "name", "message": "must have value" }, { "parameter": "price", "message": "must have value" } ] }`
+
 ## Get list of Books
 
 ### Request
 
-`GET /books`
+`GET /books?page=0&size=5`
 
 ### Response
 
@@ -36,6 +76,15 @@ The REST API to the example app is described below.
 `{ "page": 0, "count": 0, "books": [] }`
 
 ## Create a new Book
+
+### Request
+
+`POST /auth/logout`
+
+### Response
+
+- HTTP/1.1 204 OK
+- Content-Type: application/json
 
 ### Request## Get list of Books
 
@@ -128,7 +177,7 @@ The REST API to the example app is described below.
 
 ### Request
 
-`GET /authors`
+`GET /authors?page=0&size=5`
 
 ### Response
 

@@ -8,7 +8,4 @@ const isEmpty = value =>
   (Array.isArray(value) && value.length === 0) ||
   (typeof value === 'object' && Object.keys(value).length === 0);
 
-const isEmptyPage = data =>
-  isEmpty(data) || (!Array.isArray(data) && isEmpty(data?.books));
-
-export { emptyToNull, isEmpty, isEmptyPage };
+export { emptyToNull, isEmpty };

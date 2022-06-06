@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BooksApi from 'services/books';
+import { isStatusNotFound } from 'services/errors';
+import { toast } from 'commons/utils/toast';
 import DataGrid from 'components/DataGrid';
 import Button from 'components/Button';
 import Box from 'components/Box';
@@ -18,10 +20,16 @@ const Books = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({ page: 0, books: [], count: 0 });
 
-  const fetch = useCallback((page = 0) => {
-    BooksApi.page({}, page, 5)
+  const fetch = useCallback(page => {
+    BooksApi.page(page)
       .then(data => setData(data))
-      .catch(error => console.log('Error', error));
+      .catch(error => {
+        if (isStatusNotFound(error.status)) {
+          toast.error('Não foi encontrado nenhum Registro na base de dados!');
+        }
+
+        console.log('Error', error);
+      });
   }, []);
 
   const handleClickEdit = uuid => navigate(`/books/${uuid}`);
@@ -79,7 +87,7 @@ const Books = () => {
         >
           Livros
           <IconButton
-            aria-label="Novo"
+            aria-label="Novo Livro"
             size="large"
             onClick={handleClickNew}
             title="Novo Livro"

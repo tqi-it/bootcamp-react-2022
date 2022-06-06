@@ -9,6 +9,12 @@ const AuthorsPage = lazy(() => import('containers/Authors'));
 
 const routes = () => [
   {
+    path: '/books',
+    component: BooksPage,
+    layout: Layout,
+    exact: true,
+  },
+  {
     path: '/books/new',
     component: BookForm,
     layout: Layout,
@@ -20,12 +26,7 @@ const routes = () => [
     layout: Layout,
     exact: true,
   },
-  {
-    path: '/books',
-    component: BooksPage,
-    layout: Layout,
-    exact: true,
-  },
+
   {
     path: '/authors',
     component: AuthorsPage,

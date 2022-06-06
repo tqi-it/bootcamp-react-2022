@@ -9,6 +9,7 @@ const DataGrid = ({
   rowsPerPageOptions,
   handlePageChange,
   count,
+  ...outherProps
 }) => {
   const handleGetRowId = e => e[rowKey];
 
@@ -24,7 +25,8 @@ const DataGrid = ({
         rowCount={count}
         columns={columns}
         getRowId={handleGetRowId}
-        {...data}
+        disableVirtualization={true}
+        {...outherProps}
       />
     </div>
   );

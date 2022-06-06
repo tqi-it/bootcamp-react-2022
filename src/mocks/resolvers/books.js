@@ -12,9 +12,17 @@ export default [
     ),
   ),
 
-  rest.get(`/api/books/:id`, (req, res, ctx) =>
-    res(ctx.status(200), ctx.json(responseData.books.book)),
-  ),
+  rest.get(`/api/books/:id`, (req, res, ctx) => {
+    const { id: uuId } = req.params;
+    const book = responseData.books.listAll.find(item => item.code === uuId);
+
+    if (!book) {
+      return res(ctx.status(404), ctx.json(responseData.books.get404));
+    }
+
+    return res(ctx.status(200), ctx.json(book));
+    // return res(ctx.status(200), ctx.json(responseData.books.book));
+  }),
 
   rest.post(`/api/books`, (req, res, ctx) =>
     res(ctx.status(201), ctx.json(responseData.books.post)),
