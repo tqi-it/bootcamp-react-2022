@@ -1,17 +1,22 @@
 /* eslint-disable import/export */
 /* eslint-disable react/prop-types */
 import { render, configure, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import MainProvider from 'commons/providers/MainProvider';
 
 configure({ testIdAttribute: 'id' });
 
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => jest.fn(),
+}));
+
 const Wrapper = ({ children }) => <MainProvider>{children}</MainProvider>;
 
 const RouteWrapper = ({ children }) => (
-  <BrowserRouter>
+  <Router>
     <Wrapper>{children}</Wrapper>
-  </BrowserRouter>
+  </Router>
 );
 
 const customRender = (ui, options) =>
@@ -30,7 +35,7 @@ const asFragment = ui => {
 
 const toMatchSnapshot = (Component, { useRouter = false } = {}) => {
   const wrapper = asFragment(
-    useRouter ? <BrowserRouter>{Component}</BrowserRouter> : Component,
+    useRouter ? <Router>{Component}</Router> : Component,
   );
   expect(wrapper).toMatchSnapshot();
 };

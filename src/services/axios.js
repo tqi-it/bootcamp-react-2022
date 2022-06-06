@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getJwt } from '../commons/utils/auth';
+import { onResponseError } from './errors';
 
 const params = {
   headers: {
@@ -24,7 +25,10 @@ const createApi = (baseURL = '', config = {}) => {
   api.interceptors.response.use(
     response => (response.config.resHeaders ? response : response.data),
     error => {
-      console.log('Erros podem ser tratatos aqui: ', error);
+      // console.log('Erros desconhecidos podem ser tratatos aqui: ', error);
+      const { status } = error?.response;
+      onResponseError(status);
+
       return Promise.reject(error.response);
     },
   );

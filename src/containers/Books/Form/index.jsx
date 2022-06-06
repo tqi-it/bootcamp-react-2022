@@ -2,6 +2,9 @@ import { memo, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import BooksApi from 'services/books';
+import { isStatusBadRequest, isStatusNotFound } from 'services/errors';
+import { toast } from 'commons/utils/toast';
+import { isEmpty } from 'commons/utils/helpers';
 import Box from 'components/Box';
 import Grid from 'components/Grid';
 import Button from 'components/Button';
@@ -20,30 +23,49 @@ const FormBooks = () => {
 
   const isUpdate = Boolean(id);
 
-  const handleSubmit = event => {
+  const checkHelperText = (value, message) => (isEmpty(value) ? message : '');
+
+  const checkFormIsEmpty = () =>
+    isEmpty(fields.author) || isEmpty(fields.name) || isEmpty(fields.price);
+
+  const handleSubmit = async event => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
 
-    BooksApi.save({
-      ...fields,
+    await setFields(init => ({
+      ...init,
       name: formData.get('name'),
       author: formData.get('author'),
       price: formData.get('price'),
-    });
+    }));
+
+    if (checkFormIsEmpty()) {
+      toast.error('Preencha os campos do formulário!');
+      return;
+    }
+
+    try {
+      await BooksApi.save(fields);
+
+      toast.success('Registro salvo com sucesso!');
+    } catch (error) {
+      if (isStatusBadRequest(error.status)) {
+        toast.error('Não foi possível salvar o livro!');
+      }
+      console.error('Error:', error);
+    }
   };
 
-  const handleChange = event => {
+  const handleChange = event =>
     setFields(init => ({ ...init, [event.target.name]: event.target.value }));
-  };
 
   const fetch = id =>
     BooksApi.get(id)
       .then(setFields)
       .catch(error => {
-        if (error.status === 404) {
-          console.error('Error 404 - Not Found', error.data);
-          return;
+        if (isStatusNotFound(error.status)) {
+          toast.error('Não foi encontrado nenhum Registro na base de dados!');
         }
         console.error('Error:', error);
       });
@@ -84,7 +106,11 @@ const FormBooks = () => {
                 name="name"
                 value={fields?.name}
                 onChange={handleChange}
-                helperText="Obrigatório informar o nome do Livro."
+                helperText={checkHelperText(
+                  fields?.name,
+                  'Obrigatório informar o Nome do Livro',
+                )}
+                error={isEmpty(fields?.name)}
               />
             </Grid>
 
@@ -97,7 +123,11 @@ const FormBooks = () => {
                 name="author"
                 onChange={handleChange}
                 value={fields?.author}
-                helperText="Obrigatório informar o nome do Autor."
+                helperText={checkHelperText(
+                  fields?.author,
+                  'Obrigatório informar o Nome do Autor',
+                )}
+                error={isEmpty(fields?.author)}
               />
             </Grid>
 
@@ -110,7 +140,11 @@ const FormBooks = () => {
                 name="price"
                 onChange={handleChange}
                 value={fields?.price}
-                helperText="Obrigatório informar o Preço."
+                helperText={checkHelperText(
+                  fields?.price,
+                  'Obrigatório informar o Preço',
+                )}
+                error={isEmpty(fields?.price)}
               />
             </Grid>
           </Grid>
