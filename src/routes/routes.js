@@ -5,6 +5,7 @@ import { lazy } from 'react';
 import Layout from 'components/Layout';
 const BooksPage = lazy(() => import('containers/Books'));
 const BookForm = lazy(() => import('containers/Books/Form'));
+const BookPrice = lazy(() => import('containers/Books/Price'));
 const AuthorsPage = lazy(() => import('containers/Authors'));
 
 const routes = () => [
@@ -26,7 +27,12 @@ const routes = () => [
     layout: Layout,
     exact: true,
   },
-
+  {
+    path: '/books/price/:id',
+    component: BookPrice,
+    layout: Layout,
+    exact: true,
+  },
   {
     path: '/authors',
     component: AuthorsPage,

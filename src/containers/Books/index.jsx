@@ -14,7 +14,9 @@ import {
   PeopleIcon,
   EditIcon,
   DeleteIcon,
+  LocalAtmIcon,
 } from 'components/Icons';
+import serverToGrid from './helpers/parser';
 
 const Books = () => {
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ const Books = () => {
 
   const fetch = useCallback(page => {
     BooksApi.page(page)
-      .then(data => setData(data))
+      .then(data => setData(serverToGrid(data)))
       .catch(error => {
         if (isStatusNotFound(error.status)) {
           toast.error('Não foi encontrado nenhum Registro na base de dados!');
@@ -34,10 +36,25 @@ const Books = () => {
 
   const handleClickEdit = uuid => navigate(`/books/${uuid}`);
 
+  const handleClickPriceEdit = uuid => navigate(`/books/price/${uuid}`);
+
   const handleClickNew = () => navigate('/books/new');
 
-  const handleClickDel = uuid => console.log('handleClickDel', uuid);
+  const handleClickDel = code => {
+    console.log('handleClickDel', code);
+    BooksApi.delete(code)
+      .then(() => {
+        fetch();
+        toast.success('Operação realizada com sucesso!');
+      })
+      .catch(error => {
+        if (isStatusNotFound(error.status)) {
+          toast.error('Não foi encontrado nenhum Registro na base de dados!');
+        }
 
+        console.log('Error', error);
+      });
+  };
   const columns = [
     { field: 'name', flex: 1, headerName: 'Name do Livro' },
     { field: 'price', flex: 1, headerName: 'Preço' },
@@ -61,6 +78,13 @@ const Books = () => {
             title="Excluir Livro"
           >
             <DeleteIcon />
+          </IconButton>
+          <IconButton
+            size="small"
+            onClick={() => handleClickPriceEdit(params.value)}
+            title="Alterar Preço do Livro"
+          >
+            <LocalAtmIcon />
           </IconButton>
         </>
       ),

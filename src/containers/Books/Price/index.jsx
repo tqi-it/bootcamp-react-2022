@@ -1,10 +1,11 @@
 import { memo, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+
 import BooksApi from 'services/books';
 import { isStatusBadRequest, isStatusNotFound } from 'services/errors';
 import { toast } from 'commons/utils/toast';
-import { toCurrencyFormat } from 'commons/utils/currency';
 import { isEmpty } from 'commons/utils/helpers';
+import { toCurrencyFormat } from 'commons/utils/currency';
 import Box from 'components/Box';
 import Grid from 'components/Grid';
 import Button from 'components/Button';
@@ -12,21 +13,16 @@ import TextField from 'components/TextField';
 import Typography from 'components/Typography';
 import Container from 'components/Container';
 
-const FormBooks = () => {
+const FormPrice = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [fields, setFields] = useState({
-    name: '',
-    author: '',
     price: '',
   });
 
-  const isUpdate = Boolean(id);
-
   const checkHelperText = (value, message) => (isEmpty(value) ? message : '');
 
-  const checkFormIsEmpty = () =>
-    isEmpty(fields.author) || isEmpty(fields.name) || isEmpty(fields.price);
+  const checkFormIsEmpty = () => isEmpty(fields.price);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -35,8 +31,6 @@ const FormBooks = () => {
 
     await setFields(init => ({
       ...init,
-      name: formData.get('name'),
-      author: formData.get('author'),
       price: formData.get('price'),
     }));
 
@@ -46,12 +40,12 @@ const FormBooks = () => {
     }
 
     try {
-      await BooksApi.save(fields);
+      await BooksApi.patch(id, fields);
 
-      toast.success('Registro salvo com sucesso!');
+      toast.success('Registro alterado com sucesso!');
     } catch (error) {
       if (isStatusBadRequest(error.status)) {
-        toast.error('Não foi possível salvar o livro!');
+        toast.error('Não foi possível alterar o Preço do livro!');
       }
       console.error('Error:', error);
     }
@@ -87,7 +81,7 @@ const FormBooks = () => {
         }}
       >
         <Typography component="h1" variant="h5">
-          {isUpdate ? 'Editar' : 'Cadastrar'} Livros
+          Alteração de Preço do Livro
         </Typography>
 
         <Box
@@ -97,40 +91,6 @@ const FormBooks = () => {
           sx={{ mt: 3 }}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="name"
-                label="Nome do Livro"
-                name="name"
-                value={fields?.name}
-                onChange={handleChange}
-                helperText={checkHelperText(
-                  fields?.name,
-                  'Obrigatório informar o Nome do Livro',
-                )}
-                error={isEmpty(fields?.name)}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="author"
-                label="Autor"
-                name="author"
-                onChange={handleChange}
-                value={fields?.author}
-                helperText={checkHelperText(
-                  fields?.author,
-                  'Obrigatório informar o Nome do Autor',
-                )}
-                error={isEmpty(fields?.author)}
-              />
-            </Grid>
-
             <Grid item xs={12}>
               <TextField
                 required
@@ -155,7 +115,7 @@ const FormBooks = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Salvar
+            Alterar
           </Button>
 
           <Button
@@ -170,4 +130,4 @@ const FormBooks = () => {
   );
 };
 
-export default memo(FormBooks);
+export default memo(FormPrice);

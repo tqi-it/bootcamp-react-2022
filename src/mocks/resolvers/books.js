@@ -30,5 +30,7 @@ export default [
 
   rest.put(`/api/books/:id`, (req, res, ctx) => res(ctx.status(204))),
 
-  rest.patch(`/api/books`, (req, res, ctx) => res(ctx.status(204))),
+  rest.patch(`/api/books/:id`, (req, res, ctx) => res(ctx.status(204))),
+
+  rest.delete(`/api/books/:id`, (req, res, ctx) => res(ctx.status(204))),
 ];

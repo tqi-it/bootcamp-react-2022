@@ -13,6 +13,10 @@ const BooksApi = {
       ? api.put(`${path}/${data?.code}`, data)
       : api.post(path, data);
   },
+
+  patch: (code, data) => api.patch(`${path}/${code}`, data),
+
+  delete: code => api.delete(`${path}/${code}`),
 };
 
 export default BooksApi;
