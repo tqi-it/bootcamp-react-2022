@@ -2,7 +2,7 @@ import { emptyToNull, isEmpty } from 'commons/utils/helpers';
 
 describe('#emptyToNull', () => {
   test('should return null when value is null', () => {
-    expect(emptyToNull(null)).toBeNull();
+    expect(emptyToNull('')).toBeNull();
   });
 
   test('should return null when value is undefined', () => {

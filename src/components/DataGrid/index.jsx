@@ -25,6 +25,7 @@ const DataGrid = ({
         rowCount={count}
         columns={columns}
         getRowId={handleGetRowId}
+        disableVirtualization={true}
         {...outherProps}
       />
     </div>

@@ -25,4 +25,10 @@ describe('Books', () => {
     const { getByText } = setup();
     expect(getByText(/Livros/i)).toBeInTheDocument();
   });
+
+  // test('#MuiDataGrid-row', async () => {
+  //  const { findAllByRole } = setup();
+  //  const rows = await findAllByRole('row', {name: //i});
+  //  expect(rows.childNodes).toBeInTheDocument();
+  // });
 });

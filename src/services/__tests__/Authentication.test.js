@@ -3,7 +3,7 @@ import AuthenticationApi from 'services/authentication';
 
 describe('Authentication Api', () => {
   beforeEach(() => {
-    axiosMock.get.mockResolvedValue({
+    axiosMock.post.mockResolvedValue({
       data: {},
     });
   });

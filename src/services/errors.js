@@ -26,17 +26,17 @@ const isStatusTimeout = status => status === STATUS.TIMEOUT;
 
 const onResponseError = status => {
   if (isStatusFatal(status)) {
-    toast.error('');
+    toast.error('500 - Ocorreu um erro no servidor!');
     return;
   }
 
   if (isStatusUnavailable(status)) {
-    toast.error('');
+    toast.error('503 - Service Unavailable!');
     return;
   }
 
   if (isStatusTimeout(status)) {
-    toast.error('');
+    toast.error('504 - Servidor demorou para responder!');
   }
 };
 
