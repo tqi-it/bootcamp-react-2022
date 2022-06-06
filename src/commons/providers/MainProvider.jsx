@@ -3,8 +3,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider as SCThemeProvider } from 'styled-components';
 import { ThemeProvider } from '@mui/material/styles';
 
-import GlobalStyle from '../styles/global';
-import theme from '../styles/theme';
+import GlobalStyle from 'commons/styles/global';
+import theme from 'commons/styles/theme';
 
 const MainProvider = ({ children }) => (
   <ThemeProvider theme={theme}>

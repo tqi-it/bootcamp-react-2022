@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthorsApi from 'services/authors';
 import DataGrid from 'components/DataGrid';
@@ -62,4 +62,4 @@ const Authors = () => {
   );
 };
 
-export default Authors;
+export default memo(Authors);
